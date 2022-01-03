@@ -1,4 +1,4 @@
-// DecodeYst.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+// DecodeYst.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
 
 #include "stdafx.h"
@@ -10,24 +10,24 @@
 using namespace std;
 
 //************************************
-// Method:    GetFileFullName »ñÈ¡ÎÄ¼ş¶ÌÃû³Æ
+// Method:    GetFileFullName è·å–æ–‡ä»¶çŸ­åç§°
 // FullName:  GetFileFullName
 // Access:    public 
-// Returns:   CString ·µ»Ø£¬softreqhhh202102010201.docx
+// Returns:   CString è¿”å›ï¼Œ
 // Qualifier:
-// Parameter: CString csFilePath  Èë²Î£¬ÎÄ¼şÂ·¾¶£¬ D:\\download\\hr\\softreqhhh202102010201.docx
+// Parameter: CString csFilePath  å…¥å‚ï¼Œæ–‡ä»¶è·¯å¾„ï¼Œ D:\\download\\hr\\softreqhhh202102010201.docx
 //************************************
 CString GetFileFullName(CString csFilePath)
 {
-	int nPos = csFilePath.ReverseFind('\\'); // ÎÄ¼şÂ·¾¶£¬ÒÔ'\'Ğ±¸Ü·Ö¸ôµÄÂ·¾¶  
+	int nPos = csFilePath.ReverseFind('\\'); // æ–‡ä»¶è·¯å¾„ï¼Œä»¥'\'æ–œæ åˆ†éš”çš„è·¯å¾„  
 	CString csFileFullName;
-	// »ñÈ¡ÎÄ¼şÈ«Ãû£¬°üÀ¨ÎÄ¼şÃûºÍÀ©Õ¹Ãû 
+	// è·å–æ–‡ä»¶å…¨åï¼ŒåŒ…æ‹¬æ–‡ä»¶åå’Œæ‰©å±•å 
 	csFileFullName = csFilePath.Right(csFilePath.GetLength() - nPos - 1);  
 	return csFileFullName;
 }
 
 //************************************
-// Method:    GetFileName »ñÈ¡ÎÄ¼şÃûÀ©Õ¹ÃûÇ°Ãæ²¿·Ö£¬
+// Method:    GetFileName è·å–æ–‡ä»¶åæ‰©å±•åå‰é¢éƒ¨åˆ†ï¼Œ
 // FullName:  GetFileName
 // Access:    public 
 // Returns:   CString 
@@ -37,65 +37,63 @@ CString GetFileFullName(CString csFilePath)
 CString GetFileName(CString csFileFullName)
 {
 	int nPos = csFileFullName.ReverseFind('.');
-	// »ñÈ¡ÎÄ¼şÃû 
-	//Èç softreqhhh202102010201¡£
-	// »ò "D:\\download\\hr\\softreqhhh202102010201"
+	// è·å–æ–‡ä»¶å 	
 	CString  csFileName = csFileFullName.Left(nPos);  
 	return csFileName;
 }
 
 //************************************
-// Method:    GetFileExtName »ñÈ¡ÎÄ¼şÀ©Õ¹Ãû
+// Method:    GetFileExtName è·å–æ–‡ä»¶æ‰©å±•å
 // FullName:  GetFileExtName
 // Access:    public 
-// Returns:   CString ·µ»Ø "docx"
+// Returns:   CString è¿”å› "docx"
 // Qualifier:
 // Parameter: CString csFileFullName
 //************************************
 CString  GetFileExtName(CString csFileFullName)
 {
 	int nPos = csFileFullName.ReverseFind('.');
-	// »ñÈ¡À©Õ¹Ãû 
+	// è·å–æ‰©å±•å 
 	CString  csFileExtName = csFileFullName.Right(csFileFullName.GetLength() - nPos - 1);  
 	return csFileExtName;
 }
 
 //************************************
-// Method:    GetFileParentDir »ñÈ¡ÎÄ¼şËùÔÚÎÄ¼ş¼Ğ
+// Method:    GetFileParentDir è·å–æ–‡ä»¶æ‰€åœ¨æ–‡ä»¶å¤¹
 // FullName:  GetFileParentDir
 // Access:    public 
-// Returns:   CString ·µ»Ø¸¸Ä¿Â¼£¬ĞÎÈç "D:\\download\\hr\\"
+// Returns:   CString è¿”å›çˆ¶ç›®å½•ï¼Œå½¢å¦‚ "D:\\download\\hr\\"
 // Qualifier:
-// Parameter: CString csFilePath Ä¿Â¼ËùÔÚÎÄ¼ş¼Ğ£¬ĞÎÈç D:\\download\\hr\\ssssssssss
+// Parameter: CString csFilePath ç›®å½•æ‰€åœ¨æ–‡ä»¶å¤¹ï¼Œå½¢å¦‚ D:\\download\\hr\\ssssssssss
 //************************************
 CString GetFileParentDir(CString csFilePath)
 {
 	CFileFind find;
-	BOOL bResult = find.FindFile(csFilePath);  //ÅĞ¶Ï×ÓÄ¿Â¼ÊÇ·ñ´æÔÚ  
+	BOOL bResult = find.FindFile(csFilePath);  //åˆ¤æ–­å­ç›®å½•æ˜¯å¦å­˜åœ¨  
 
 	find.FindNextFile();
 
-	CString RootDir = find.GetRoot();  //¸¸Ä¿Â¼  
+	CString RootDir = find.GetRoot();  //çˆ¶ç›®å½•  
 	return RootDir;
 }
 
 
 //************************************
-// Method:    FindFileInDir  µİ¹é»ñÈ¡Ä¿Â¼ÏÂµÄËùÓĞÎÄ¼ş
+// Method:    FindFileInDir  é€’å½’è·å–ç›®å½•ä¸‹çš„æ‰€æœ‰æ–‡ä»¶
 // FullName:  FindFileInDir
 // Access:    public 
 // Returns:   void
 // Qualifier:
-// Parameter: CString rootDir Èë²Î£¬ÎÄ¼ş¼Ğ
-// Parameter: vector<CString> & csFileList ³ö²Î£¬ÎÄ¼şÂ·¾¶ÁĞ±í
+// Parameter: CString rootDir å…¥å‚ï¼Œæ–‡ä»¶å¤¹
+// Parameter: vector<CString> & csFileList å‡ºå‚ï¼Œæ–‡ä»¶è·¯å¾„åˆ—è¡¨
 //************************************
 void FindFileInDir(CString rootDir, vector<CString>& csFileList)
 {
-	// ²éÕÒµ±Ç°Â·¾¶ÏÂµÄËùÓĞÎÄ¼ş¼ĞºÍÎÄ¼ş
+	// æŸ¥æ‰¾å½“å‰è·¯å¾„ä¸‹çš„æ‰€æœ‰æ–‡ä»¶å¤¹å’Œæ–‡ä»¶
 	CString strDir = rootDir;
 	strDir += "\\*.*";
 
-	// ±éÀúµÃµ½ËùÓĞ×ÓÎÄ¼ş¼ĞÃû
+	// éå†å¾—åˆ°æ‰€æœ‰å­æ–‡ä»¶å¤¹å
 	CFileFind finder;
 	BOOL bWorking = finder.FindFile(strDir);
 
@@ -104,9 +102,9 @@ void FindFileInDir(CString rootDir, vector<CString>& csFileList)
 		bWorking = finder.FindNextFile();
 		if (finder.IsDirectory() && "." != finder.GetFileName() && ".." != finder.GetFileName())
 		{
-			//µİ¹éµ÷ÓÃ
+			//é€’å½’è°ƒç”¨
 			CString subDirName = finder.GetFileName();
-			//.¿ªÍ·µÄÎÄ¼ş¼ĞÌø¹ı
+			//.å¼€å¤´çš„æ–‡ä»¶å¤¹è·³è¿‡
 			if ('.' != subDirName.GetAt(0))
 			{
 				FindFileInDir(finder.GetFilePath(), csFileList);
@@ -127,7 +125,7 @@ void FindFileInDir(CString rootDir, vector<CString>& csFileList)
 }
 
 //************************************
-// Method:    CreateMultiDirectory ´´½¨¶à¼¶Ä¿Â¼
+// Method:    CreateMultiDirectory åˆ›å»ºå¤šçº§ç›®å½•
 // FullName:  CreateMultiDirectory
 // Access:    public 
 // Returns:   BOOL
@@ -140,18 +138,18 @@ BOOL CreateMultiDirectory(CString strPath)
 	CString strMsg;
 	int nCount = 0;
 	int nIndex = 0;
-	//Í¨¹ı¡°\¡±À´·Ö¸îÂ·¾¶£¬´Ó¶ø´´½¨¸÷¼¶µÄÄ¿Â¼¡£
+	//é€šè¿‡â€œ\â€æ¥åˆ†å‰²è·¯å¾„ï¼Œä»è€Œåˆ›å»ºå„çº§çš„ç›®å½•ã€‚
 	do
 	{
 		nIndex = strPath.Find(_T("\\"), nIndex) + 1;
 		nCount++;
 	} while ((nIndex - 1) != -1);
 
-	//Èç¹ûÊÇÎÄ¼şµÄ»°£¬×îºó»á°ÑÎÄ¼şÃûµ±×öÎÄ¼ş¼Ğ´¦Àí£¬¼õÈ¥1¸öË÷Òı£¬¿ÉÒÔ±ÜÃâ
+	//å¦‚æœæ˜¯æ–‡ä»¶çš„è¯ï¼Œæœ€åä¼šæŠŠæ–‡ä»¶åå½“åšæ–‡ä»¶å¤¹å¤„ç†ï¼Œå‡å»1ä¸ªç´¢å¼•ï¼Œå¯ä»¥é¿å…
 	nCount -= 1;
 
 	nIndex = 0;
-	//¼ì²é£¬²¢´´½¨Ä¿Â¼
+	//æ£€æŸ¥ï¼Œå¹¶åˆ›å»ºç›®å½•
 	while ((nCount - 1) >= 0)
 	{
 		nIndex = strPath.Find(_T("\\"), nIndex) + 1;
@@ -159,9 +157,9 @@ BOOL CreateMultiDirectory(CString strPath)
 			strSubPath = strPath;
 		else
 			strSubPath = strPath.Left(nIndex);
-		if (!PathFileExists(strSubPath))// - ¼ì²éÄ¿Â¼ÊÇ·ñ´æÔÚ
+		if (!PathFileExists(strSubPath))// - æ£€æŸ¥ç›®å½•æ˜¯å¦å­˜åœ¨
 		{
-			if (!CreateDirectory(strSubPath, NULL))// -²»´æÔÚÔò´´½¨Ä¿Â¼
+			if (!CreateDirectory(strSubPath, NULL))// -ä¸å­˜åœ¨åˆ™åˆ›å»ºç›®å½•
 			{
 				return FALSE;
 			}
@@ -172,7 +170,7 @@ BOOL CreateMultiDirectory(CString strPath)
 }
 
 //************************************
-// Method:    DoDecodeFile Ö´ĞĞÊµ¼Ê×ª»»£¬µ¥¸öÎÄ¼ş
+// Method:    DoDecodeFile æ‰§è¡Œå®é™…è½¬æ¢ï¼Œå•ä¸ªæ–‡ä»¶
 // FullName:  DoDecodeFile
 // Access:    public 
 // Returns:   void
@@ -182,27 +180,27 @@ BOOL CreateMultiDirectory(CString strPath)
 //************************************
 void DoDecodeFile(CString filePathSrc, CString filePathDest)
 {
-	//1. Ô¤´¦Àí
-	CString csFileNameNoExt = GetFileName(filePathSrc);  //ÎÄ¼şÂ·¾¶È¥µôÀ©Õ¹Ãû²¿·Ö
-	CString csFileExtName = GetFileExtName(filePathSrc); //À©Õ¹Ãû
+	//1. é¢„å¤„ç†
+	CString csFileNameNoExt = GetFileName(filePathSrc);  //æ–‡ä»¶è·¯å¾„å»æ‰æ‰©å±•åéƒ¨åˆ†
+	CString csFileExtName = GetFileExtName(filePathSrc); //æ‰©å±•å
 				
-	//1.1 ÖĞ¼äÎÄ¼şÂ·¾¶
+	//1.1 ä¸­é—´æ–‡ä»¶è·¯å¾„
 	CString filePathTemp = csFileNameNoExt + "_new.tempFileYYDS";
 
-	//1.2 Èç¹ûÊÇÌØÊâµÄÀ©Õ¹Ãû£¬ÈçmatlabÎÄ¼ş£¬ĞŞ¸ÄÎªÎÄ±¾ÎÄ¼şºó´¦Àí
+	//1.2 å¦‚æœæ˜¯ç‰¹æ®Šçš„æ‰©å±•åï¼Œä¿®æ”¹æ‰©å±•ååå¤„ç†
 	BOOL bBack = FALSE;
 	CString oriFilePath = filePathSrc;
-	CString newFilePath;
-	if (csFileExtName.Compare("m") == 0 || csFileExtName.Compare("sln") == 0)
+	CString newFilePath;	
+	if(csFileExtName.Compare("pdf") != 0)
 	{
-		newFilePath = csFileNameNoExt + "_new.txt";
+		newFilePath = csFileNameNoExt + "_new.pdf";
 		CopyFile(filePathSrc, newFilePath, FALSE);
 		filePathSrc = newFilePath;
 		bBack = TRUE;
 	}
 
-	//2. ¿½±´ÎÄ¼şµ½ÖĞ¼äÎÄ¼ş
-	//2.1 ¹¹ÔìÃüÁî
+	//2. æ‹·è´æ–‡ä»¶åˆ°ä¸­é—´æ–‡ä»¶
+	//2.1 æ„é€ å‘½ä»¤
 	char tmp[1024];
 	CString csCmdLine;
 	//sprintf_s(tmp, sizeof(tmp), "start cmd.exe  /c ");
@@ -218,7 +216,7 @@ void DoDecodeFile(CString filePathSrc, CString filePathDest)
 	lstrcat(pszCmdLine, "\\cmd.exe /c ");
 	lstrcat(pszCmdLine, csCmdLine.GetString());
 
-	//2.2 Ö´ĞĞÃüÁî
+	//2.2 æ‰§è¡Œå‘½ä»¤
 	//system(csCmdLine);		
 	//WinExec(csCmdLine, SW_HIDE);
 
@@ -248,136 +246,135 @@ void DoDecodeFile(CString filePathSrc, CString filePathDest)
 	CloseHandle(pi.hProcess);
 	CloseHandle(pi.hThread);
 		
-	//3. ÖØÃüÃûÎªÄ¿±êÎÄ¼ş	
-	//3.1 Èç¹ûÄ¿±êÎÄ¼şÒÑ´æÔÚ£¬ÏÈshanchu
+	//3. é‡å‘½åä¸ºç›®æ ‡æ–‡ä»¶	
+	//3.1 å¦‚æœç›®æ ‡æ–‡ä»¶å·²å­˜åœ¨ï¼Œå…ˆshanchu
 	BOOL bFile = PathFileExists(filePathDest);
 	if (bFile)
 	{
 		DeleteFile(filePathDest);
 	}
 
-	//3.2 ÎÄ¼şÖØÃüÃû
+	//3.2 æ–‡ä»¶é‡å‘½å
 	//::Sleep(1000);
 	//CFile::Rename(filePathTemp, filePathDest);
 	MoveFile(filePathTemp, filePathDest);
 
-	//¸´ÖÆ¹ıµÄÎÄ¼ş£¬ÓÃÍêÁËÉ¾³ı
+	//å¤åˆ¶è¿‡çš„æ–‡ä»¶ï¼Œç”¨å®Œäº†åˆ é™¤
 	if (bBack)
 	{
 		DeleteFile(newFilePath);
 	}
-	printf("×ª»»ÎÄ¼ş %s --> %s \n", filePathSrc.GetString(), filePathDest.GetString());
+	printf("è½¬æ¢æ–‡ä»¶ %s --> %s \n", oriFilePath.GetString(), filePathDest.GetString());
 }
 
 //************************************
-// Method:    DecodeFile ×ª»»Ò»¸öÎÄ¼ş
+// Method:    DecodeFile è½¬æ¢ä¸€ä¸ªæ–‡ä»¶
 // FullName:  DecodeFile
 // Access:    public 
 // Returns:   void
 // Qualifier:
-// Parameter: CString filePath Èë²Î£¬ÎÄ¼şÈ«Â·¾¶¡£D:\\download\\hr\\softreqhhh202102010201.docx
+// Parameter: CString filePath å…¥å‚ï¼Œæ–‡ä»¶å…¨è·¯å¾„ã€‚D:\\download\\hr\\softreqhhh202102010201.docx
 //************************************
 void DecodeFile(CString filePath)
 {
-	//1. »ñÈ¡ÎÄ¼şÂ·¾¶Ïà¹ØĞÅÏ¢
+	//1. è·å–æ–‡ä»¶è·¯å¾„ç›¸å…³ä¿¡æ¯
 	CString csFileFullName = GetFileFullName(filePath);
 	CString csFileName = GetFileName(filePath);
 	CString csFileExtName = GetFileExtName(csFileFullName);
 
-	//2. »ñÈ¡Ä¿±êÎÄ¼şÃû
-	//2.2 Ä¿±êÎÄ¼şÂ·¾¶
+	//2. è·å–ç›®æ ‡æ–‡ä»¶å
+	//2.2 ç›®æ ‡æ–‡ä»¶è·¯å¾„
 	CString csFileDestPath = csFileName + "_new." + csFileExtName;
 
-	//3.½øĞĞ×ª»»
+	//3.è¿›è¡Œè½¬æ¢
 	DoDecodeFile(filePath, csFileDestPath);		
 }
 
 
 //************************************
-// Method:    DoDecodeDirectory ×ª»»Ò»¸öÄ¿Â¼
+// Method:    DoDecodeDirectory è½¬æ¢ä¸€ä¸ªç›®å½•
 // FullName:  DoDecodeDirectory
 // Access:    public 
 // Returns:   void
 // Qualifier:
-// Parameter: CString dirSrcPath Èë²Î£¬Ô´Ä¿Â¼
-// Parameter: CString dirDestPath Èë²Î£¬Ä¿µÄÄ¿Â¼
+// Parameter: CString dirSrcPath å…¥å‚ï¼Œæºç›®å½•
+// Parameter: CString dirDestPath å…¥å‚ï¼Œç›®çš„ç›®å½•
 //************************************
 void DoDecodeDirectory(CString dirSrcPath, CString dirDestPath)
 {
-	//1. ÕÒµ½ËùÓĞ´ı×ª»»ÎÄ¼ş
+	//1. æ‰¾åˆ°æ‰€æœ‰å¾…è½¬æ¢æ–‡ä»¶
 	vector<CString> csFileSrcList;
 	FindFileInDir(dirSrcPath, csFileSrcList);
 
-	//2. ×ª»»ÎªÄ¿±êÎÄ¼şÂ·¾¶,²¢½øĞĞ×ª»»
-	//2.1 ¹¹ÔìÄ¿±êÎÄ¼şÂ·¾¶	
+	//2. è½¬æ¢ä¸ºç›®æ ‡æ–‡ä»¶è·¯å¾„,å¹¶è¿›è¡Œè½¬æ¢
+	//2.1 æ„é€ ç›®æ ‡æ–‡ä»¶è·¯å¾„	
 	for (unsigned int i = 0; i < csFileSrcList.size(); ++i)
 	{
 		CString srcFilePath = csFileSrcList.at(i);
 		CString dstFilePath = srcFilePath;				
 		dstFilePath.Replace(dirSrcPath, dirDestPath);
 		
-		//2.2 µİ¹é´´½¨ÎÄ¼ş¼Ğ		
+		//2.2 é€’å½’åˆ›å»ºæ–‡ä»¶å¤¹		
 		BOOL bSucc = CreateMultiDirectory(dstFilePath);
 		if (!bSucc)
 		{
 			continue;
 		}
 
-		//3. ½øĞĞÎÄ¼ş×ª»»
+		//3. è¿›è¡Œæ–‡ä»¶è½¬æ¢
 		DoDecodeFile(srcFilePath, dstFilePath);
 	}
 }
 
 //************************************
-// Method:    DecodeDirectory ¶ÔÒ»¸öÎÄ¼ş¼Ğ½øĞĞ×ª»»
+// Method:    DecodeDirectory å¯¹ä¸€ä¸ªæ–‡ä»¶å¤¹è¿›è¡Œè½¬æ¢
 // FullName:  DecodeDirectory
 // Access:    public 
 // Returns:   void
 // Qualifier:
-// Parameter: CString dirPath Èë²Î£¬ÎÄ¼ş¼ĞÄ¿Â¼
+// Parameter: CString dirPath å…¥å‚ï¼Œæ–‡ä»¶å¤¹ç›®å½•
 //************************************
 void DecodeDirectory(CString dirPath)
 {
-	//1. »ñÈ¡ÎÄ¼şÂ·¾¶Ïà¹ØĞÅÏ¢
+	//1. è·å–æ–‡ä»¶è·¯å¾„ç›¸å…³ä¿¡æ¯
 	CString csDirName = GetFileFullName(dirPath);	
 	CString csDirNameNew = dirPath + "_new";
 	
-	//2. ½øĞĞ×ª»»
+	//2. è¿›è¡Œè½¬æ¢
 	DoDecodeDirectory(dirPath, csDirNameNew);	
 }
 
-
 int main(int argc, char* argv[])
 {
-	//1. »ñÈ¡ÊäÈëÎÄ¼ş»òÎÄ¼ş¼ĞÂ·¾¶
-	printf("È·ÈÏÒÚÈüÍ¨ÒÑµÇÂ½.\n");
-	printf("ÇëÊäÈëÎÄ¼ş»òÎÄ¼ş¼ĞÂ·¾¶,ÖĞ¼äÎŞ¿Õ¸ñ.\n");
+	//1. è·å–è¾“å…¥æ–‡ä»¶æˆ–æ–‡ä»¶å¤¹è·¯å¾„
+	printf("ç¡®è®¤äº¿èµ›é€šå·²ç™»é™†.\n");
+	printf("è¯·è¾“å…¥æ–‡ä»¶æˆ–æ–‡ä»¶å¤¹è·¯å¾„,ä¸­é—´æ— ç©ºæ ¼.\n");
 	string strFileDirIn;
 	getline(cin, strFileDirIn);	
 	//cout << strFileDirIn << endl;
 
-	//2. ÅĞ¶ÏÊäÈëÀàĞÍ
+	//2. åˆ¤æ–­è¾“å…¥ç±»å‹
 	CString strPath = strFileDirIn.c_str();
 	BOOL bFile = PathFileExists(strPath);
 	if (!bFile)
 	{
-		printf("ÎÄ¼ş»òÄ¿Â¼ %s ²»´æÔÚ! \n", strPath.GetString());
+		printf("æ–‡ä»¶æˆ–ç›®å½• %s ä¸å­˜åœ¨! \n", strPath.GetString());
 		system("pause");
 		return 0;
 	}
 	BOOL bDir = GetFileAttributes(strPath) & FILE_ATTRIBUTE_DIRECTORY;
 	if (bDir)
 	{
-		//ÎÄ¼ş¼Ğ
+		//æ–‡ä»¶å¤¹
 		DecodeDirectory(strPath);
 	}
 	else
 	{
-		//ÎÄ¼ş
+		//æ–‡ä»¶
 		DecodeFile(strPath);
 	}
 
-	// µÈ´ı£¬×îºóÍË³ö
+	// ç­‰å¾…ï¼Œæœ€åé€€å‡º
 	system("pause");
     return 0;
 }
